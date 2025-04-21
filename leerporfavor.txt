@@ -1,0 +1,5 @@
+Ingreso
+correo: leopalacio@gmail.com
+contraseña: 12345
+No se puede registrar en el inicio de sesion, puesto que es un sistema privado, pienso 
+hacer que se puedan ingresar usuarios mediante enlaces de invitacion
