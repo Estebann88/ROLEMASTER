@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Permisos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styleper.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #244884DB;">
+      <div class="container-fluid">
+        <h1><a class="navbar-brand" href="#">Vista de administrador</a></h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Buscar roles" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 sidebar">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+              <img src="Imagenes/home.svg" alt="Inicio"> Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gestionpermisos.html">
+              <img src="Imagenes/radio.svg" alt="Gestión de Permisos"> Gestión de Permisos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">
+              <img src="Imagenes/restaurar 1.png" alt="Registro de Actividad"> Registro de Actividad
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="gestionrol.html">
+              <img src="Imagenes/grupos 1.png" alt="Gestión de roles"> Gestión de roles
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <img src="Imagenes/settings_24dp_FILL0_wght400_GRAD0_opsz24.png" alt="Configuración"> Configuración
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9 content">
+        <section id="permissions-section">
+          <h2>Gestión de Permisos</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID Permiso</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Fecha de Modificación</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="permissionsTableBody">
+              <!-- Aquí se generarán  las filas de permisos con js -->
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-start mt-3">
+            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#permissionModal">Añadir Permiso</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal para añadir/editar permiso -->
+  <div class="modal fade" id="permissionModal" tabindex="-1" aria-labelledby="permissionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="permissionModalLabel">Añadir Permiso</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="permissionForm">
+            <div class="mb-3">
+              <label for="permissionName" class="form-label">Nombre del Permiso</label>
+              <input type="text" class="form-control" id="permissionName" required>
+            </div>
+            <div class="mb-3">
+              <label for="permissionDescription" class="form-label">Descripción del Permiso</label>
+              <textarea class="form-control" id="permissionDescription" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+  <script src="js/permissions.js"></script>
+</body>
+</html>
