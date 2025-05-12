@@ -4,8 +4,51 @@ body {
   font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
 }
 
+/* Fondo general */
+.bg-landing {
+  background: #e9ecef !important;
+}
+
+/* Header y footer */
+.navbar, .footer-landing {
+  background: #fff !important;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.navbar-brand {
+  font-size: 2rem;
+  color: #0069d9 !important;
+  letter-spacing: 1px;
+}
+.logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  margin-right: 8px;
+}
+
 header.navbar {
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* Hero principal */
+.hero-landing {
+  padding: 3rem 0 2rem 0;
+  background: transparent;
+}
+.hero-landing .display-4 {
+  color: #111;
+}
+.hero-landing .text-primary {
+  color: #0069d9 !important;
+}
+.hero-landing .lead {
+  color: #444;
+}
+.hero-img-small {
+  max-width: 180px;
+  height: auto;
+  margin-bottom: 1.5rem;
 }
 
 .hero {
@@ -33,6 +76,19 @@ header.navbar {
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 
+/* Cards */
+.card-landing {
+  border: none;
+  border-radius: 1.1rem;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+.card-landing:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+}
+
 .card {
   background: #27304b;
   border-radius: 1.2rem;
@@ -45,11 +101,36 @@ header.navbar {
   box-shadow: 0 8px 32px rgba(0,0,0,0.22);
 }
 .card-title {
-  color: #f8d90f;
+  color: #0069d9;
   font-weight: 600;
 }
 .card-text {
-  color: #e0e0e0;
+  color: #222;
+}
+.card-img-small {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* Botones */
+.btn-primary, .btn-primary:focus {
+  background: #0069d9 !important;
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #0069d933;
+  transition: background 0.18s, color 0.18s;
+}
+.btn-primary:hover {
+  background: #0053b3 !important;
+  color: #fff !important;
+}
+
+.btn-lg {
+  padding: 0.7rem 2.2rem;
+  font-size: 1.2rem;
+  border-radius: 2rem;
 }
 
 .btn-warning, .btn-warning:focus {
@@ -72,6 +153,20 @@ header.navbar {
   border: none;
 }
 
+/* Frases y textos secundarios */
+.text-muted, .text-secondary {
+  color: #777 !important;
+}
+
+/* Footer */
+.footer-landing {
+  border-top: 1px solid #e9ecef;
+  background: #fff !important;
+  color: #222;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
 footer {
   background: #27304b !important;
   color: #fff;
@@ -81,6 +176,15 @@ footer {
 }
 
 @media (max-width: 767px) {
+  .hero-img-small {
+    max-width: 90vw;
+  }
+  .card-landing {
+    margin-bottom: 1.5rem;
+  }
+  .navbar-brand {
+    font-size: 1.3rem;
+  }
   .hero img {
     max-width: 90vw;
   }
