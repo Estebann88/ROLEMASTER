@@ -8,6 +8,23 @@ $gestion_id = $_POST['gestion_id'];
 $nivel = $_POST['nivel'];
 $turno = $_POST['turno'];
 
+// Validar que no exista ya un nivel con el mismo nombre y turno (excepto el actual)
+$consulta = $pdo->prepare('SELECT COUNT(*) FROM niveles WHERE nivel = :nivel AND turno = :turno AND gestion_id = :gestion_id AND id_nivel != :id_nivel AND estado = 1');
+$consulta->bindParam(':nivel', $nivel);
+$consulta->bindParam(':turno', $turno);
+$consulta->bindParam(':gestion_id', $gestion_id);
+$consulta->bindParam(':id_nivel', $id_nivel);
+$consulta->execute();
+$existe = $consulta->fetchColumn();
+
+if ($existe > 0) {
+    session_start();
+    $_SESSION['mensaje'] = "Ya existe un nivel con el mismo nombre y turno en esta gestión.";
+    $_SESSION['icono'] = "error";
+    header('Location:'.APP_URL."/admin/niveles/edit.php?id=".$id_nivel);
+    exit();
+}
+
 $sentencia = $pdo->prepare('UPDATE niveles
  SET gestion_id=:gestion_id,
      nivel=:nivel,

@@ -4,7 +4,7 @@ $id_nivel = $_GET['id'];
 include ('../../app/config.php');
 include ('../../admin/layout/parte1.php');
 
-include ('../../app/controllers/grados/datos_grados.php');
+include ('../../app/controllers/niveles/datos_nivel.php');
 
 ?>
 

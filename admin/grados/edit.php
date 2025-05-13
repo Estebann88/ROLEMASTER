@@ -4,7 +4,7 @@ include ('../../app/config.php');
 include ('../../admin/layout/parte1.php');
 
 include ('../../app/controllers/grados/datos_grados.php');
-include ('../../app/controllers/niveles /listado_de_niveles.php');
+include ('../../app/controllers/niveles/listado_de_niveles.php');
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -29,11 +29,11 @@ include ('../../app/controllers/niveles /listado_de_niveles.php');
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Nivel</label>
-                                            <select name="nivel_id" id="" class="form-control">
+                                            <select name="nivel_id" id="nivel_id" class="form-control" onchange="actualizarCursos()">
                                                 <?php
                                                 foreach ($niveles as $nivele){
                                                   ?>
-                                                    <option value="<?=$nivele['id_nivel'];?>"><?=$nivele['nivel']."-".$nivele['turno'];?></option>
+                                                    <option value="<?=$nivele['id_nivel'];?>" data-nivel="<?=$nivele['nivel'];?>" <?php if($nivele['id_nivel'] == $nivel_id) echo 'selected'; ?>><?=$nivele['nivel']."-".$nivele['turno'];?></option>
                                                     <?php
 
                                                    }
@@ -46,19 +46,8 @@ include ('../../app/controllers/niveles /listado_de_niveles.php');
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="">Curso</label>
-                                            <select name="curso" id="" class="form-control">
-                                                <option value="TECNICO Eléctrica y electrónica">TECNICO Eléctrica y electrónica</option>
-                                                <option value="TECNICO(TIC).">TECNICO(TIC)</option>
-                                                <option value="TECNICO en auxiliar de veterinaria">TECNICO en auxiliar de veterinaria</option>
-                                                <option value="TECNICO Personal de mercadeo y publicidad">TECNICO Personal de mercadeo y publicidad</option>
-                                                <option value="TECNOLOGO en Ciencia de Datos">TECNOLOGO en Ciencia de Datos</option>
-                                                <option value="TECNOLOGO en Ingeniería de Software">TECNOLOGO en Ingeniería de Software</option>
-                                                <option value="TECNOLOGO en Ciberseguridad">TECNOLOGO en Ciberseguridad</option>
-                                                <option value="TECNOLOGO en Desarrollo Web">TECNOLOGO en Desarrollo Web</option>
-                                                <option value="PROFESIONAL Abogacía">PROFESIONAL Abogacía</option>
-                                                <option value="PROFESIONAL Ciencias Ambientales">PROFESIONAL Ciencias Ambientales</option>
-                                                <option value="PROFESIONAL Redes y Comunicaciones">PROFESIONAL Redes y Comunicaciones</option>
-                                                <option value="PROFESIONAL Negocios Internacionales">PROFESIONAL Negocios Internacionales</option>
+                                            <select name="curso" id="curso" class="form-control">
+                                                <!-- Opciones serán cargadas por JS -->
                                             </select>
                                         </div>
                                     </div>
@@ -104,3 +93,47 @@ include ('../../admin/layout/parte2.php');
 include ('../../layout/mensajes.php');
 
 ?>
+
+<script>
+const cursosPorNivel = {
+    'TECNICO': [
+        'TECNICO Eléctrica y electrónica',
+        'TECNICO(TIC).',
+        'TECNICO en auxiliar de veterinaria',
+        'TECNICO Personal de mercadeo y publicidad'
+    ],
+    'TECNOLOGO': [
+        'TECNOLOGO en Ciencia de Datos',
+        'TECNOLOGO en Ingeniería de Software',
+        'TECNOLOGO en Ciberseguridad',
+        'TECNOLOGO en Desarrollo Web'
+    ],
+    'PROFESIONAL': [
+        'PROFESIONAL Abogacía',
+        'PROFESIONAL Ciencias Ambientales',
+        'PROFESIONAL Redes y Comunicaciones',
+        'PROFESIONAL Negocios Internacionales'
+    ]
+};
+
+function actualizarCursos() {
+    const nivelSelect = document.getElementById('nivel_id');
+    const cursoSelect = document.getElementById('curso');
+    const selectedOption = nivelSelect.options[nivelSelect.selectedIndex];
+    const nivel = selectedOption.getAttribute('data-nivel');
+    const cursoActual = "<?=isset($curso) ? $curso : ''?>";
+    // Limpiar opciones actuales
+    cursoSelect.innerHTML = '';
+    if (cursosPorNivel[nivel]) {
+        cursosPorNivel[nivel].forEach(curso => {
+            const opt = document.createElement('option');
+            opt.value = curso;
+            opt.textContent = curso;
+            if (curso === cursoActual) opt.selected = true;
+            cursoSelect.appendChild(opt);
+        });
+    }
+}
+// Inicializar al cargar
+window.onload = actualizarCursos;
+</script>

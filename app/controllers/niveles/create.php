@@ -6,6 +6,22 @@ $gestion_id = $_POST['gestion_id'];
 $nivel = $_POST['nivel'];
 $turno = $_POST['turno'];
 
+// Validar que no exista ya un nivel con el mismo nombre y turno
+$consulta = $pdo->prepare('SELECT COUNT(*) FROM niveles WHERE nivel = :nivel AND turno = :turno AND gestion_id = :gestion_id AND estado = 1');
+$consulta->bindParam(':nivel', $nivel);
+$consulta->bindParam(':turno', $turno);
+$consulta->bindParam(':gestion_id', $gestion_id);
+$consulta->execute();
+$existe = $consulta->fetchColumn();
+
+if ($existe > 0) {
+    session_start();
+    $_SESSION['mensaje'] = "Ya existe un nivel con el mismo nombre y turno en esta gestión.";
+    $_SESSION['icono'] = "error";
+    header('Location:'.APP_URL."/admin/niveles/create.php");
+    exit();
+}
+
 $sentencia = $pdo->prepare('INSERT INTO niveles
 (gestion_id,nivel,turno, fyh_creacion, estado)
 VALUES ( :gestion_id,:nivel,:turno,:fyh_creacion,:estado)');
